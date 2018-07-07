@@ -1,0 +1,169 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+
+# import sequtils.cds
+import sequtils.clean
+# import sequtils.count
+# import sequtils.edit
+import sequtils.extract
+# import sequtils.extract_annot
+# import sequtils.filter
+import sequtils.index
+# import sequtils.make_annot
+# import sequtils.orf
+import sequtils.random
+# import sequtils.rc
+# import sequtils.rewrap
+# import sequtils.secretion
+# import sequtils.slice
+# import sequtils.split
+# import sequtils.sort
+# import sequtils.stats
+# import sequtils.table
+# import sequtils.translate
+
+
+def make_parser():
+    parser = argparse.ArgumentParser(
+        description='Sequence utilities',
+        add_help=False)
+    parser.add_argument(
+        '-h', '--help', action='help',
+        help='Print this help page and exit.')
+    subparsers = parser.add_subparsers(title='Subcommands')
+
+    # cds_subparser = subparsers.add_parser(
+    #     'cds', add_help=False,
+    #     help='Find CDSs in sequences.')
+    # sequtils.cds.add_arguments(cds_subparser)
+
+    clean_subparser = subparsers.add_parser(
+        'clean', add_help=False,
+        help='Remove sequences with encoding errors.')
+    sequtils.clean.add_arguments(clean_subparser)
+
+    # count_subparser = subparsers.add_parser(
+    #     'count', add_help=False,
+    #     help='Count sequences or bases.')
+    # sequtils.count.add_arguments(count_subparser)
+
+    # edit_subparser = subparsers.add_parser(
+    #     'edit', add_help=False,
+    #     help='Modify sequences or their descriptions.')
+    # sequtils.edit.add_arguments(edit_subparser)
+
+    extract_subparser = subparsers.add_parser(
+        'extract', add_help=False,
+        help='Extract sequences by their ID or information.')
+    sequtils.extract.add_arguments(extract_subparser)
+
+    # extract_annot_subparser = subparsers.add_parser(
+    #     'extract_annot', add_help=False,
+    #     help='Extract annotations specified in a BED/GFF file.')
+    # sequtils.extract_annot.add_arguments(extract_annot_subparser)
+
+    # filter_subparser = subparsers.add_parser(
+    #     'filter', add_help=False,
+    #     help='Filter sequences.')
+    # sequtils.filter.add_arguments(filter_subparser)
+
+    index_subparser = subparsers.add_parser(
+        'index', add_help=False,
+        help='Make a FASTA file index.')
+    sequtils.index.add_arguments(index_subparser)
+
+    # make_annot_subparser = subparsers.add_parser(
+    #     'make_annot', add_help=False,
+    #     help='Make a basic BED/GFF file out of sequences.')
+    # sequtils.make_annot.add_arguments(make_annot_subparser)
+
+    # orf_subparser = subparsers.add_parser(
+    #     'orf', add_help=False,
+    #     help='Find ORFs in sequences.')
+    # sequtils.orf.add_arguments(orf_subparser)
+
+    random_subparser = subparsers.add_parser(
+        'random', add_help=False,
+        help='Generate random sequences.')
+    sequtils.random.add_arguments(random_subparser)
+
+    # rc_subparser = subparsers.add_parser(
+    #     'rc', add_help=False,
+    #     help='Reverse complement sequences.')
+    # sequtils.rc.add_arguments(rc_subparser)
+
+    # rewrap_subparser = subparsers.add_parser(
+    #     'rewrap', add_help=False,
+    #     help='Change sequence wrapping.')
+    # sequtils.rewrap.add_arguments(rewrap_subparser)
+
+    # secretion_subparser = subparsers.add_parser(
+    #     'secretion', add_help=False,
+    #     help='Detect secreted proteins.')
+    # sequtils.secretion.add_arguments(secretion_subparser)
+
+    # slice_subparser = subparsers.add_parser(
+    #     'slice', add_help=False,
+    #     help='Get a slice of a given sequence.')
+    # sequtils.slice.add_arguments(slice_subparser)
+
+    # split_subparser = subparsers.add_parser(
+    #     'split', add_help=False,
+    #     help='Split the FASTA file into parts.')
+    # sequtils.split.add_arguments(split_subparser)
+
+    # sort_subparser = subparsers.add_parser(
+    #     'sort', add_help=False,
+    #     help='Sort sequences.')
+    # sequtils.sort.add_arguments(sort_subparser)
+
+    # stats_subparser = subparsers.add_parser(
+    #     'stats', add_help=False,
+    #     help='Make sequence length/composition statistics.')
+    # sequtils.stats.add_arguments(stats_subparser)
+
+    # table_subparser = subparsers.add_parser(
+    #     'table', add_help=False,
+    #     help='Make a table of sequences.')
+    # sequtils.table.add_arguments(table_subparser)
+
+    # translate_subparser = subparsers.add_parser(
+    #     'translate', add_help=False,
+    #     help='Translate sequences into aminoacids.')
+    # sequtils.translate.add_arguments(translate_subparser)
+
+    return parser
+
+
+if __name__ == '__main__':
+    parser = make_parser()
+    args = parser.parse_args()
+    if args == argparse.Namespace():
+        parser.print_help()
+        sys.exit(0)
+    args.check(args)
+    args.process(args)
+
+
+# cds             Find CDSs in sequences
+# clean           Remove sequences with encoding errors
+# count           Count sequences or bases
+# edit            Modify sequences or their descriptions
+# extract         Extract sequences by their ID or information
+# extract_annot   Extract annotations specified in a BED/GFF file
+# filter          Filter sequences
+# index           Make a FASTA file index
+# make_annot      Make a basic BED/GFF file out of sequences
+# orf             Find ORFs in sequences
+# random          Generate random sequences
+# rc              Reverse complement sequences
+# rewrap          Change sequence wrapping
+# secretion       Detect secreted proteins
+# slice           Get a slice of a given sequence
+# split           Split the FASTA file into parts
+# sort            Sort sequences
+# stats           Make sequence length/composition statistics
+# table           Make a table of sequences
+# translate       Translate sequences into aminoacids
